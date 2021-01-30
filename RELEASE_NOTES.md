@@ -1,14 +1,41 @@
 # Release Notes
 
 ## Version 0.3.1:
-### Breaking Changes
-- 
-- 
+
 
 ### New Features
+- new methods `roc_auc_curve(pos_label)` and `pr_auc_curve(pos_label)`
+- new method `get_classification_df(...)` to get dataframe with number of labels
+    above and below a given cutoff.
+    - this now gets used by `plot_classification(..)`
+- added parameters `sort_features` to `FeatureInputComponent`:
+    - defaults to `'shap'`: order features by mean absolute shap
+    - if set to `'alphabet'` features are sorted alphabetically
+- added parameter `fill_row_first` to `FeatureInputComponent`:
+    - defaults to `True`: fill first row first, then next row, etc
+    - if False: fill first column first, then second column, etc
+
+### Bug Fixes
+- categorical mappings now updateable with pandas<=1.2 and python==3.6
+- title now overridable for `RegressionRandomIndexComponent`
+- added assert check on `summary_type` for `ShapSummaryComponent`
+
+### Improvements
+- pre-Calculating lift_curve_df only once and then storing for each pos_label
+    - plus: storing only 100 evenly spaced rows of lift_curve_df
+    - should be much faster for large datasets
+- pre-calculating roc_auc_curve and pr_auc_curve
+    - should be much faster for large datasets
+- confusion matrix: added axis title, moved predicted labels to bottom of graph
+
+### Other Changes
 -
 -
 
+## version 0.3.0.1:
+
+### Breaking Changes
+- new dependency requirements `pandas>=1.2` also implies `python>=3.7`
 ### Bug Fixes
 - categorical mappings now updateablke with pandas<=1.2 and python==3.6
 - title now overridable for `RegressionRandomIndexComponent`
